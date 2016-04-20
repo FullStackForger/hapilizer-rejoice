@@ -1,0 +1,61 @@
+{
+	"connections": [
+		{
+			"port": 8080,
+			"labels": [
+				"api",
+				"http"
+			]
+		}
+	],
+	"registrations": [{
+			"plugin": "vision"
+		}, {
+			"plugin": "inert"
+		}, {
+			"plugin": "lout"
+		}, {
+			"plugin": {
+				"register": "hapilizer",
+				"options": {
+					"auth": {
+						"token": {
+							"secret": "secret_token",
+							"algorithms": [ "HS256" ]
+						},
+						"providers": {
+							"facebook": {
+								"clientId": "",
+								"secret": ""
+							}
+						}
+					},
+					"database": {
+						"host": "127.0.0.1",
+						"port": "27017",
+						"db": "ifms-api-test",
+						"username": "",
+						"password": ""
+					}
+				}
+			}
+		},{
+		"plugin": {
+			"register": "good",
+			"options": {
+				"ops": {
+					"interval": 1000
+				},
+				"reporters": {
+					"console": [{
+            "module": "good-squeeze",
+            "name": "Squeeze",
+            "args": [{ "log": "*", "response": "*" }]
+					},{
+            "module": "good-console"
+					}, "stdout"]
+				}
+			}
+		}
+	}]
+}
